@@ -6,6 +6,7 @@ const icons = require('./webpack.icons.js');
 const images = require('./webpack.images.js');
 const scripts = require('./webpack.scripts.js');
 const styles = require('./webpack.styles.dev.js');
+const path = require('path');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -20,14 +21,16 @@ module.exports = merge(common, fonts, icons, images, scripts, styles, {
             'react-hot-loader/patch',
             'webpack/hot/only-dev-server',
             './src/index.tsx',
-            './assets/styles.dev.less'
+            './assets/styles/styles.dev.less'
         ]
     },
     devServer: {
         hot: true,
-        inline: true,
         compress: true,
-        contentBase: './dist/',
+        static: {
+            directory: path.join(__dirname, 'dist'),
+            watch: true,
+        },
         port: 3004,
         historyApiFallback: true
     },
@@ -53,12 +56,12 @@ module.exports = merge(common, fonts, icons, images, scripts, styles, {
         new MiniCssExtractPlugin({
             filename: '[name].css'
         }),
-        new CopyWebpackPlugin({ 
+        new CopyWebpackPlugin({
             patterns: [{ from: 'assets/images/**/*' }]
-          }),
-        new CopyWebpackPlugin({ 
-            patterns: [{ from: 'assets/styles/**/*' }]
-          }),
+        }),
+        new CopyWebpackPlugin({
+            patterns: [{ from: 'assets/styles/**/*', to: 'assets/styles' }]
+        }),
         new CopyWebpackPlugin({
             patterns: [{ from: 'assets/fonts/**/*' }]
         }),
