@@ -1,4 +1,4 @@
-﻿namespace UsersApi.Domain
+﻿namespace UsersApi.Models.Unused
 {
     public enum Type
     { 

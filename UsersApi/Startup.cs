@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
-using UsersApi.Domain;
+using UsersApi.Models.Entities;
 
 namespace UsersApi
 {

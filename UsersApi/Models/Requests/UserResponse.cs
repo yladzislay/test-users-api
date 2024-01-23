@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using UsersApi.Models.DTO;
 
-namespace UsersApi.Domain
+namespace UsersApi.Models.Requests
 {
     public class UserResponse
     {

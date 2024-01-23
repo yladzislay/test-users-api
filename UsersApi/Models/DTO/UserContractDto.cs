@@ -1,4 +1,4 @@
-﻿namespace UsersApi.Domain
+﻿namespace UsersApi.Models.DTO
 {
     public class UserContractDto
     {

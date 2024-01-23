@@ -1,5 +1,5 @@
 ﻿using MongoDB.Driver;
-using UsersApi.Domain;
+using UsersApi.Models.Entities;
 
 namespace UsersApi.Services
 {

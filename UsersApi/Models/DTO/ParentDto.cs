@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UsersApi.Domain
+namespace UsersApi.Models.DTO
 {
     public class ParentDto
     {
