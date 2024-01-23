@@ -39,9 +39,9 @@ namespace UsersApi
             BsonClassMap.RegisterClassMap<Position>(m => m.AutoMap());
 
             var mongoDbConnectionString = Configuration.GetSection("MongoDB:ConnectionString").Value;
-            var mongoClient = new MongoClient(mongoDbConnectionString);
-            services.AddSingleton(mongoClient);
+            services.AddSingleton<IMongoClient>(_ => new MongoClient(mongoDbConnectionString));
             services.AddSingleton<MongoDbService>();
+            services.AddSingleton<DatabaseInitializer>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,6 +50,11 @@ namespace UsersApi
             app.UseRouting();
             app.UseCors("AllowOrigin");
             app.UseEndpoints(endpoints => endpoints.MapControllers());
+            
+            var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using var scope = scopeFactory.CreateScope();
+            var databaseInitializer = scope.ServiceProvider.GetRequiredService<DatabaseInitializer>();
+            databaseInitializer.RunAsync().Wait();
         }
     }
 }
