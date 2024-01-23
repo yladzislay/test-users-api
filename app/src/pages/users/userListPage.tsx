@@ -18,7 +18,10 @@ const UserListPage = ({
     loadList
 }: Props) => {
 
-    useEffect(loadList);
+    useEffect(() => {
+        loadList();
+        return () => {};
+    }, []);
 
     return <div className={styles.userListPage}>
         {list.isLoading && <div>Загрузка...</div>}
