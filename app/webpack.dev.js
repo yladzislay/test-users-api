@@ -20,8 +20,7 @@ module.exports = merge(common, fonts, icons, images, scripts, styles, {
         app: [
             'react-hot-loader/patch',
             'webpack/hot/only-dev-server',
-            './src/index.tsx',
-            './assets/styles/styles.dev.less'
+            './src/index.tsx'
         ]
     },
     devServer: {
