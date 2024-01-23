@@ -16,7 +16,7 @@ db.positions.insertMany([
   {
     _id: devsId,
     name: 'Разработчик',
-	defaultSalary: 150000
+	defaultSalary: 555000
   },
   {
     _id: buhId,
