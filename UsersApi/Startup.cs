@@ -13,7 +13,14 @@ namespace UsersApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin",
+                    builder => builder
+                        .WithOrigins("http://localhost:3004")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
             
             var conventionPack = new ConventionPack
             {
@@ -40,7 +47,7 @@ namespace UsersApi
             }
 
             app.UseRouting();
-            app.UseCors("AllowOrigins");
+            app.UseCors("AllowOrigin");
 
             app.UseEndpoints(endpoints =>
             {
