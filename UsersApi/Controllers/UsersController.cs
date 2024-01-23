@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using UsersApi.Domain;
+using UsersApi.Services;
 
 namespace UsersApi.Controllers
 {

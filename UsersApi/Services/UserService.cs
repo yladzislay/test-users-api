@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using MongoDB.Driver;
+using UsersApi.Domain;
 
-namespace UsersApi.Domain
+namespace UsersApi.Services
 {
     
     public class UserService
