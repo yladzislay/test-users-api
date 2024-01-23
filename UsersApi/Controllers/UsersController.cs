@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using UsersApi.Models.DTO;
+﻿using Microsoft.AspNetCore.Mvc;
 using UsersApi.Models.Requests;
 using UsersApi.Services;
 
@@ -8,33 +6,18 @@ namespace UsersApi.Controllers
 {
     [ApiController]
     [Route("api/{controller}")]
-    public class UsersController : ControllerBase
+    public class UsersController(MongoDbService mongoDbService) : ControllerBase
     {
         [Route("list")]
         public IActionResult GetList()
         {
             var response = new UserResponse
             {
-                Users = new List<UserDto>()
+                Users = mongoDbService.GetAllUsers(),
             };
 
-            var userService = new UserService();
-            var users = userService.GetAll();
-            response.Total = users.Count;
-            for (int i = 1; i < users.Count; i++)
-            {
-                var user = users[i];
-                var dto = new UserDto
-                {
-                    Id = user.Id,
-                    Login = user.Login,
-                    Name = user.Name
-                };
-                var position = new PositionService().GetById(user.PositionId);
-                dto.Position = position.Name;
-                dto.DefaultSalary = position.DefaultSalary;
-                response.Users.Add(dto);
-            }
+            response.Total = response.Users.Count;
+
             return Ok(response);
         }
     }
