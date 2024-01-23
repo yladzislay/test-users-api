@@ -1,18 +1,23 @@
 version: '3.9'
 
 services:
-  mongo-database:
-    build: ./.mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./mongo/data:/data/db
+  mongodb:
+    container_name: mongodb
+    build:
+      dockerfile: mongo/Dockerfile
+    restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
       MONGO_INITDB_DATABASE: users
-  
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo/data:/data/db
+      - ./mongo/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/
+
   users-api-backend:
+    container_name: users-api-backend
     build:
       dockerfile: UsersApi/Dockerfile
     ports:
@@ -20,4 +25,4 @@ services:
     expose:
       - "5001"
     depends_on:
-      - mongo-database
+      - mongodb
