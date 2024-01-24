@@ -22,7 +22,5 @@ services:
       dockerfile: UsersApi/Dockerfile
     ports:
       - "5001:8080"
-    expose:
-      - "5001"
     depends_on:
       - mongodb
